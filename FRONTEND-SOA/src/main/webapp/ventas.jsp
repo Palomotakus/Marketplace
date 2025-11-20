@@ -10,68 +10,71 @@
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Centro de Ventas - El Buen Lector</title>
+        <title>Centro de Ventas - NovaShop</title>
         <link rel="stylesheet" href="styles/ventas.css?v=<%= System.currentTimeMillis()%>">
         <style>
             .cliente-info {
-                margin-top: 10px;
-                background-color: #f9fafb;
-                border: 1px solid #ddd;
-                border-radius: 6px;
-                padding: 10px;
+                margin-top: 15px;
+                background: rgba(30, 41, 59, 0.3);
+                border: 1px solid rgba(167, 139, 250, 0.3);
+                border-radius: 12px;
+                padding: 15px;
             }
             .cliente-ok {
-                background-color: #e0f7e9;
-                border-color: #4caf50;
+                background: rgba(34, 197, 94, 0.1);
+                border-color: rgba(34, 197, 94, 0.5);
             }
             .cliente-error {
-                background-color: #fff3f3;
-                border-color: #f44336;
+                background: rgba(239, 68, 68, 0.1);
+                border-color: rgba(239, 68, 68, 0.5);
             }
             .error {
-                color: red;
+                color: #f87171;
                 font-size: 0.9em;
-                margin-top: 5px;
+                margin-top: 8px;
+                font-weight: 500;
             }
             input[readonly] {
-                background-color: #f3f4f6;
+                background: rgba(30, 41, 59, 0.5) !important;
+                cursor: not-allowed;
+                opacity: 0.7;
             }
         </style>
     </head>
 
     <body>
-
         <%
             String rol = (String) session.getAttribute("rol");
         %>
 
+        <!-- ===== SIDEBAR NAVIGATION ===== -->
         <div class="sidebar">
-            <h2>El Buen Lector</h2>
+            <h2>NovaShop</h2>
             <p>Gestión Moderna</p>
-            <!-- 📚 Enlaces visibles para todos -->
-            <a href="Inventario" class="nav-item">📚 Inventario</a>
-            <a href="Venta" class="nav-item active">💲 Ventas</a>
-
-            <!-- 👥 Solo para Administrador -->
+            
+            <a href="Inventario" class="nav-item">📦 Inventario</a>
+            <a href="Venta" class="nav-item active">💳 Ventas</a>
+            
             <% if ("Administrador".equalsIgnoreCase(rol)) { %>
-            <a href="Empleado" class="nav-item">👥 Empleados</a>
-            <a href="Reportes" class="nav-item">📊 Reportes</a>
+                <a href="Empleado" class="nav-item">👥 Empleados</a>
+                <a href="Reportes" class="nav-item">📊 Reportes</a>
             <% }%>
-
-            <!-- 🕓 Visible para todos -->
-            <a href="historial.jsp" class="nav-item">🕓 Historial</a>
-            <a href="Catalogo.jsp" class="nav-item"> DEMO CATALOGO</a>
-            <a href="Login?accion=cerrar" class="logout">Cerrar Sesión</a>
+            
+            <a href="historial.jsp" class="nav-item">🕒 Historial</a>
+            <a href="Catalogo.jsp" class="nav-item">📖 Catálogo</a>
+            
+            <a href="Login?accion=cerrar" class="logout">🚪 Cerrar Sesión</a>
         </div>
 
+        <!-- ===== MAIN CONTENT ===== -->
         <div class="main">
             <h1>Centro de Ventas</h1>
             <p>Procesa tus ventas de manera rápida y eficiente</p>
 
             <div class="ventas-container">
-                <!-- Columna izquierda -->
+                <!-- ===== COLUMNA IZQUIERDA: NUEVA VENTA ===== -->
                 <div class="card">
-                    <h2>💲 Nueva Venta</h2>
+                    <h2>💳 Nueva Venta</h2>
 
                     <!-- ====================== DATOS DEL CLIENTE ====================== -->
                     <div class="section blue">
@@ -79,10 +82,12 @@
 
                         <!-- Formulario para buscar cliente -->
                         <form action="Venta" method="get" style="margin-bottom: 1em;">
-                            <input type="text" name="dni" placeholder="DNI del cliente (8 dígitos)" maxlength="8"
-                                   value="<%= request.getAttribute("dni") != null ? request.getAttribute("dni") : ""%>" required />
+                            <input type="text" name="dni" placeholder="DNI del cliente (8 dígitos)" 
+                                   maxlength="8"
+                                   value="<%= request.getAttribute("dni") != null ? request.getAttribute("dni") : ""%>" 
+                                   required />
                             <input type="hidden" name="accion" value="buscarDni">
-                            <button type="submit" class="btn btn-blue">Buscar Cliente</button>
+                            <button type="submit" class="btn btn-blue">🔍 Buscar Cliente</button>
                         </form>
 
                         <%
@@ -97,9 +102,9 @@
                         <% if (hayDni != null) {%> 
                         <div class="cliente-info <%= hayDni ? "cliente-ok" : "cliente-error"%>">
                             <% if (hayDni) { %>
-                            <p>✅ Cliente encontrado, los datos se cargaron automáticamente.</p>
+                            <p style="color: #22c55e; margin-bottom: 10px;">✅ Cliente encontrado, los datos se cargaron automáticamente.</p>
                             <% } else { %>
-                            <p>❗ No se encontró el cliente, ingrésalo manualmente:</p>
+                            <p style="color: #f87171; margin-bottom: 10px;">❗ No se encontró el cliente, ingrésalo manualmente:</p>
                             <% if (error != null) {%><p class="error"><%= error%></p><% } %>
                             <% }%>
 
@@ -151,13 +156,13 @@
                             %>
                         </select>
                         <input type="number" placeholder="Cantidad" min="1" />
-                        <button class="btn btn-green">Agregar</button>
+                        <button class="btn btn-green">➕ Agregar al Carrito</button>
                     </div>
 
                     <!-- ====================== FORMULARIO FINALIZAR VENTA ====================== -->
                     <form action="Venta" method="post" id="formFinalizar">
                         <!-- Datos ocultos del cliente -->
-                        <div class="section blue" style="display: none;">
+                        <div style="display: none;">
                             <input type="text" name="dni" maxlength="8"
                                    value="<%= request.getAttribute("dni") != null ? request.getAttribute("dni") : ""%>">
                             <input type="text" name="nombre"
@@ -168,11 +173,11 @@
                                    value="<%= request.getAttribute("apellidoMaterno") != null ? request.getAttribute("apellidoMaterno") : ""%>">
                         </div>
 
-                        <!-- Libros -->
+                        <!-- Libros en el carrito -->
                         <div class="section green">
                             <h3>📚 Libros en Venta</h3>
                             <div id="listaCarrito">
-                                <p style="color:#9ca3af;">Aún no hay libros agregados</p>
+                                <p style="color:#64748b; text-align: center;">Aún no hay libros agregados</p>
                             </div>
                         </div>
 
@@ -183,11 +188,11 @@
                         </div>
 
                         <input type="hidden" id="jsonCarrito" name="jsonCarrito">
-                        <button type="submit" class="finalizar">Finalizar Venta</button>
+                        <button type="submit" class="finalizar">✅ Finalizar Venta</button>
                     </form>
-
                 </div>
 
+                <!-- ===== COLUMNA DERECHA: RECIBO ===== -->
                 <%
                     Boolean reciboGenerado = (Boolean) request.getAttribute("reciboGenerado");
                     String clienteNombre = (String) request.getAttribute("clienteNombre");
@@ -206,7 +211,7 @@
                         <div class="recibo-header">
                             <div class="icono">📘</div>
                             <h2>RECIBO DE VENTA</h2>
-                            <h3>El Buen Lector</h3>
+                            <h3>NovaShop</h3>
                             <small>N° <%= numeroRecibo != null ? numeroRecibo : "000000"%></small><br>
                             <small><%= fechaVenta != null ? fechaVenta : ""%></small>
                         </div>
@@ -230,7 +235,7 @@
                             </div>
                             <% }
                             } else { %>
-                            <p style="color:#9ca3af;">No se registraron libros.</p>
+                            <p style="color:#64748b;">No se registraron libros.</p>
                             <% }%>
                         </div>
 
@@ -240,7 +245,7 @@
                         </div>
 
                         <button class="btn-imprimir">🖨️ Imprimir Recibo</button>
-                        <p class="mensaje-final">📗 Gracias por su compra en <strong>El Buen Lector</strong><br>¡Esperamos verle pronto!</p>
+                        <p class="mensaje-final">📗 Gracias por su compra en <strong>NovaShop</strong><br>¡Esperamos verle pronto!</p>
                     </div>
 
                     <% } else { %>
@@ -254,11 +259,8 @@
                     </div>
                     <% } %>
                 </div>
-
             </div>
         </div>
-
-        <input type="hidden" id="jsonCarrito" name="jsonCarrito">
     </body>
 </html>
 
@@ -294,7 +296,7 @@
                 const cantidad = parseInt(cantidadInput.value);
 
                 if (!opcion.value || isNaN(cantidad) || cantidad <= 0) {
-                    alert("Seleccione un libro y una cantidad válida");
+                    alert("⚠️ Seleccione un libro y una cantidad válida");
                     return;
                 }
 
@@ -305,14 +307,14 @@
                 const stock = parseInt(opcion.dataset.stock);
 
                 if (cantidad > stock) {
-                    alert(`❗ Solo hay \${stock} unidades disponibles de "\${titulo}"`);
+                    alert(`❗ Solo hay ${stock} unidades disponibles de "${titulo}"`);
                     return;
                 }
 
                 const existente = carrito.find((l) => l.codigo === codigo);
                 if (existente) {
                     if (existente.cantidad + cantidad > stock) {
-                        alert(`❗ No puedes agregar más de \${stock} unidades de "\${titulo}"`);
+                        alert(`❗ No puedes agregar más de ${stock} unidades de "${titulo}"`);
                         return;
                     }
                     existente.cantidad += cantidad;
@@ -322,13 +324,15 @@
                 }
 
                 renderCarrito();
+                cantidadInput.value = "";
+                select.selectedIndex = 0;
             });
         }
 
         function renderCarrito() {
             listaCarrito.innerHTML = "";
             if (carrito.length === 0) {
-                listaCarrito.innerHTML = `<p style="color:#9ca3af;">Aún no hay libros agregados</p>`;
+                listaCarrito.innerHTML = `<p style="color:#64748b; text-align: center;">Aún no hay libros agregados</p>`;
                 totalPagar.textContent = "S/ 0.00";
                 inputJson.value = "";
                 return;
@@ -338,19 +342,19 @@
                 item.classList.add("item-carrito");
                 item.innerHTML = `
                 <div class="info-libro">
-                    <strong>\${libro.titulo}</strong><br>
-                    <small>\${libro.autor}</small><br>
-                    <span class="precio">S/ \${libro.precio.toFixed(2)} × \${libro.cantidad}</span>
+                    <strong>${libro.titulo}</strong>
+                    <small>${libro.autor}</small>
+                    <span class="precio">S/ ${libro.precio.toFixed(2)} × ${libro.cantidad}</span>
                 </div>
                 <div class="subtotal">
-                    <span class="monto">S/ \${libro.subtotal.toFixed(2)}</span>
-                    <span class="eliminar" data-index="\${i}">🗑️</span>
+                    <span class="monto">S/ ${libro.subtotal.toFixed(2)}</span>
+                    <span class="eliminar" data-index="${i}">🗑️</span>
                 </div>
             `;
                 listaCarrito.appendChild(item);
             });
             const total = carrito.reduce((acc, l) => acc + l.subtotal, 0);
-            totalPagar.textContent = `S/ \${total.toFixed(2)}`;
+            totalPagar.textContent = `S/ ${total.toFixed(2)}`;
             inputJson.value = JSON.stringify(carrito);
         }
 
@@ -362,13 +366,12 @@
             }
         });
 
-        // ✅ Copiar datos del cliente antes de enviar la venta
         if (formCliente && formFinalizar) {
             formFinalizar.addEventListener('submit', (e) => {
                 const campos = ['dni', 'nombre', 'apellido1', 'apellido2'];
                 campos.forEach(campo => {
-                    const inputCliente = formCliente.querySelector(`[name="\${campo}"]`);
-                    let inputFinal = formFinalizar.querySelector(`[name="\${campo}"]`);
+                    const inputCliente = formCliente.querySelector(`[name="${campo}"]`);
+                    let inputFinal = formFinalizar.querySelector(`[name="${campo}"]`);
                     if (inputCliente) {
                         if (!inputFinal) {
                             inputFinal = document.createElement('input');
@@ -382,16 +385,13 @@
             });
         }
 
-        // 🧠 Manejo dinámico del required (evita error "not focusable")
         const hiddenInputs = formFinalizar.querySelectorAll('input[name]');
         hiddenInputs.forEach(i => i.removeAttribute('required'));
 
-        // Reactivar required solo al enviar
         formFinalizar.addEventListener('submit', () => {
             hiddenInputs.forEach(i => i.setAttribute('required', 'true'));
         });
 
-        // Guardar carrito en todos los formularios
         forms.forEach(form => {
             form.addEventListener("submit", () => {
                 const json = JSON.stringify(carrito || []);
