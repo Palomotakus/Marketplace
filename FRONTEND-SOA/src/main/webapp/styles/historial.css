@@ -1,0 +1,120 @@
+/* === Estilos personalizados para Historial de Ventas === */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    
+    min-height: 100vh;
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #1f2937;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 20px;
+}
+
+.sidebar h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.sidebar p {
+    font-size: 0.9rem;
+    color: #9ca3af;
+    margin-bottom: 30px;
+}
+
+/* ==== Enlaces del menú lateral ==== */
+.sidebar a {
+    text-decoration: none;       /* Quita el subrayado */
+    color: inherit;              /* Mantiene el color del texto */
+    display: block;              /* Ocupa todo el ancho del contenedor */
+}
+
+.sidebar a.nav-item {
+    padding: 12px 15px;
+    border-radius: 10px;
+    color: #d1d5db;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar a.nav-item:hover,
+.sidebar a.nav-item.active {
+    background-color: #374151;
+    color: #fff;
+}
+
+.logout {
+    background-color: #dc2626;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: auto;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.logout:hover {
+    background-color: #b91c1c;
+}
+/* Sidebar */
+
+
+/* Inputs y botones */
+.input-field {
+  width: 100%;
+  border: 1px solid #cbd5e1;
+  border-radius: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  outline: none;
+  transition: border 0.2s ease;
+}
+
+.input-field:focus {
+  border-color: #6366f1;
+}
+
+.btn-primary {
+  background-color: #7c3aed;
+  color: white;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-primary:hover {
+  background-color: #6d28d9;
+}
+
+.btn-secondary {
+  background-color: #f1f5f9;
+  color: #475569;
+  font-weight: 600;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.btn-secondary:hover {
+  background-color: #e2e8f0;
+}

@@ -1,0 +1,536 @@
+/*
+Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/CascadeStyleSheet.css to edit this template
+*/
+/* 
+    Created on : 9 oct. 2025, 02:30:09
+    Author     : luisc
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    min-height: 100vh;
+    background-color: #f3f4f6;
+    color: #1f2937;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 250px;
+    background-color: #1f2937;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    padding: 25px 20px;
+}
+
+.sidebar h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+
+.sidebar p {
+    font-size: 0.9rem;
+    color: #9ca3af;
+    margin-bottom: 30px;
+}
+
+/* ==== Enlaces del menú lateral ==== */
+.sidebar a {
+    text-decoration: none;       /* Quita el subrayado */
+    color: inherit;              /* Mantiene el color del texto */
+    display: block;              /* Ocupa todo el ancho del contenedor */
+}
+
+.sidebar a.nav-item {
+    padding: 12px 15px;
+    border-radius: 10px;
+    color: #d1d5db;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background 0.2s;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sidebar a.nav-item:hover,
+.sidebar a.nav-item.active {
+    background-color: #374151;
+    color: #fff;
+}
+
+.logout {
+    background-color: #dc2626;
+    color: white;
+    padding: 12px;
+    border-radius: 10px;
+    margin-top: auto;
+    cursor: pointer;
+    font-weight: 600;
+    text-align: center;
+    transition: background 0.3s;
+}
+
+.logout:hover {
+    background-color: #b91c1c;
+}
+
+/* Toggle button */
+.menu-toggle {
+    display: none;
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: #1f2937;
+    color: white;
+    border: none;
+    font-size: 1.5rem;
+    padding: 8px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    z-index: 100;
+}
+
+/* Main content */
+.main {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+    width: 100%;
+}
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card {
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+.card h3 {
+    font-size: 0.9rem;
+    color: #6b7280;
+    margin-bottom: 10px;
+}
+
+.card .value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #1f2937;
+}
+
+/* Table section */
+.table-section {
+    background: white;
+    padding: 25px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+.table-header {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.table-header h2 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1f2937;
+}
+
+.table-header p {
+    color: #6b7280;
+    font-size: 0.9rem;
+}
+
+.buttons {
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+    color: white;
+}
+
+.btn.orange {
+    background-color: #f97316;
+}
+.btn.blue {
+    background-color: #3b82f6;
+}
+
+.btn.orange:hover {
+    background-color: #ea580c;
+}
+.btn.blue:hover {
+    background-color: #2563eb;
+}
+
+.search-filter {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+.search-filter input, .search-filter select {
+    padding: 10px 15px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    background: #f9fafb;
+    flex: 1;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    text-align: left;
+    padding: 12px;
+    font-size: 0.9rem;
+}
+
+th {
+    color: #6b7280;
+    background-color: #f3f4f6;
+}
+
+tbody tr {
+    border-bottom: 1px solid #e5e7eb;
+}
+
+tbody tr:last-child {
+    border-bottom: none;
+}
+
+.stock {
+    font-weight: 600;
+    color: white;
+    padding: 4px 10px;
+    border-radius: 10px;
+    text-align: center;
+    display: inline-block;
+}
+
+.stock.green {
+    background-color: #22c55e;
+}
+.stock.yellow {
+    background-color: #facc15;
+    color: #333;
+}
+.stock.red {
+    background-color: #ef4444;
+}
+
+.actions a {
+    text-decoration: none;
+    font-weight: 600;
+    margin-right: 10px;
+}
+
+.actions .edit {
+    color: #3b82f6;
+}
+.actions .delete {
+    color: #ef4444;
+}
+
+/* Fondo oscuro del modal */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    backdrop-filter: blur(3px);
+}
+
+/* Contenedor del modal */
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 30px;
+    border-radius: 12px;
+    width: 400px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    animation: fadeIn 0.3s ease;
+}
+
+/* Botón cerrar (X) */
+.close {
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+/* Estilos del formulario */
+.modal-content form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.modal-content input,
+.modal-content select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.modal-actions .cancelar {
+    background: #e5e7eb;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+.modal-actions .guardar {
+    background: #2563eb;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ===== MODAL GESTIONAR CATEGORÍAS ===== */
+#modalCategorias {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.4);
+    backdrop-filter: blur(3px);
+    justify-content: center;
+    align-items: center;
+}
+
+#modalCategorias .modal-content {
+    background: white;
+    border-radius: 16px;
+    padding: 30px;
+    width: 420px;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.2);
+    animation: fadeIn 0.3s ease;
+}
+
+#modalCategorias h2 {
+    margin-bottom: 15px;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #1f2937;
+    text-align: center;
+}
+
+#modalCategorias .nueva-categoria {
+    background: #fff7e6;
+    border-radius: 12px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+#modalCategorias .nueva-categoria h3 {
+    font-size: 1rem;
+    color: #1f2937;
+    margin-bottom: 10px;
+}
+
+#modalCategorias .nueva-categoria form {
+    display: flex;
+    gap: 10px;
+}
+
+#modalCategorias .nueva-categoria input {
+    flex: 1;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+#modalCategorias .nueva-categoria .btn.orange {
+    flex-shrink: 0;
+}
+
+#modalCategorias .lista-categorias {
+    background: #f9fafb;
+    border-radius: 12px;
+    padding: 10px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+#modalCategorias .categoria-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 8px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+#modalCategorias .categoria-item:last-child {
+    border-bottom: none;
+}
+
+#modalCategorias .categoria-item span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: #1f2937;
+    font-weight: 500;
+}
+
+#modalCategorias .categoria-item form {
+    margin: 0;
+}
+
+#modalCategorias .categoria-item .btn.delete {
+    background: none;
+    border: none;
+    color: #ef4444;
+    cursor: pointer;
+    font-size: 1rem;
+    transition: transform 0.2s;
+}
+
+#modalCategorias .categoria-item .btn.delete:hover {
+    transform: scale(1.2);
+}
+
+#modalCategorias .close {
+    float: right;
+    font-size: 24px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #6b7280;
+}
+
+#modalCategorias .close:hover {
+    color: #1f2937;
+}
+
+/* Botón eliminar base */
+.btn.delete {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 6px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-trash {
+    width: 20px;
+    height: 20px;
+    color: #e53935;
+    transition: all 0.3s ease;
+}
+
+.btn.delete:hover .icon-trash {
+    color: #c62828;
+    transform: scale(1.1);
+}
+
+.btn.delete.disabled-btn {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.btn.delete.disabled-btn .icon-trash {
+    color: #b0b0b0;
+    opacity: 0.6;
+}
+
+.btn.delete.disabled-btn:hover .icon-trash {
+    color: rgba(150, 150, 150, 0.6);
+    transform: none;
+    cursor: not-allowed;
+}
+
+
+
+.contenedor {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+    text-align: center;
+}
+h1 {
+    margin-bottom: 30px;
+    color: #333;
+}
+.boton {
+    display: block;
+    width: 300px;
+    margin: 10px auto;
+    padding: 15px;
+    font-size: 18px;
+    color: white;
+    background-color: #0078D7;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    text-decoration: none;
+}
+.boton:hover {
+    background-color: #005fa3;
+}
+
