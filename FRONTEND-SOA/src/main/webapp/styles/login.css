@@ -1,0 +1,109 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  background: linear-gradient(135deg, #d4c2a3, #b89f82);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+}
+
+/* Caja del login estilo librería */
+.login-container {
+  background: #fff8f0;
+  padding: 45px 40px;
+  width: 380px;
+  border-radius: 25px;
+  box-shadow: 0 8px 30px rgba(80, 62, 36, 0.25);
+  animation: fadeIn 0.8s ease;
+  border: 2px solid #e5d9c5;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Logo estilo libro */
+.logo {
+  width: 95px;
+  height: 95px;
+  background: #f1e6d3;
+  border-radius: 18px;
+  margin: 0 auto 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 5px 15px rgba(120, 93, 61, 0.25);
+  border: 2px solid #ccb292;
+}
+
+.logo svg {
+  width: 48px;
+  height: 48px;
+  color: #8a6b47;
+}
+
+/* Títulos cálidos */
+h1 {
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: #4e3b2d;
+  margin-bottom: 5px;
+}
+
+p {
+  text-align: center;
+  font-size: 0.95rem;
+  color: #7a624c;
+  margin-bottom: 25px;
+}
+
+/* Inputs estilo suave */
+input {
+  width: 100%;
+  padding: 12px;
+  background: #f5ede2;
+  border: 2px solid #e0d4c3;
+  border-radius: 12px;
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+}
+
+input:focus {
+  background: #fff;
+  border-color: #c19a6b;
+  box-shadow: 0 0 8px rgba(193, 154, 107, 0.4);
+  outline: none;
+}
+
+/* Botón estilo librería */
+button {
+  width: 100%;
+  padding: 13px;
+  background: #c19a6b;
+  color: #fff;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s ease;
+  box-shadow: 0 4px 12px rgba(110, 85, 55, 0.4);
+}
+
+button:hover {
+  background: #ad8455;
+  box-shadow: 0 4px 16px rgba(110, 85, 55, 0.5);
+}
+
