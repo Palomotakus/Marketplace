@@ -1,9 +1,10 @@
 <%-- 
-    Document   : empleados
-    Created on : 9 oct. 2025, 02:33:44
-    Author     : luisc
+    Document   : empleados
+    Created on : 9 oct. 2025, 02:33:44
+    Author     : luisc
 --%>
 
+<%@page import="java.util.Collections"%>
 <%@page import="java.util.Map"%>
 <%@page import="com.mycompany.frontend.entidades.Empleado"%>
 <%@page import="java.util.List"%>
@@ -15,32 +16,33 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Gestión de Empleados - El Buen Lector</title>
 
-        <!-- Enlace al archivo CSS -->
-
         <link rel="stylesheet" href="styles/empleados.css?v=<%= System.currentTimeMillis()%>">
 
     </head>
     <body>
-        
         <%
+            // Lógica de sesión y seguridad
             String rol = (String) session.getAttribute("rol");
+            
+            // Inicialización segura del mapa de estadísticas
+            Map<String, Integer> estadisticas = (Map<String, Integer>) request.getAttribute("estadisticas");
+            if (estadisticas == null) {
+                estadisticas = Collections.emptyMap(); 
+            }
         %>
         
         <div class="sidebar">
             <h2>El Buen Lector</h2>
             <p>Gestión Moderna</p>
 
-            <!-- 📚 Enlaces visibles para todos -->
             <a href="Inventario" class="nav-item ">📚 Inventario</a>
             <a href="Venta" class="nav-item">💲 Ventas</a>
 
-            <!-- 👥 Solo para Administrador -->
             <% if ("Administrador".equalsIgnoreCase(rol)) { %>
             <a href="Empleado" class="nav-item active">👥 Empleados</a>
             <a href="Reportes" class="nav-item">📊 Reportes</a>
             <% } %>
 
-            <!-- 🕓 Visible para todos -->
             <a href="historial.jsp" class="nav-item">🕓 Historial</a>
             <a href="Catalogo.jsp" class="nav-item"> DEMO CATALOGO</a>
 
@@ -56,21 +58,21 @@
                 <div class="card">
                     <div class="info">
                         <h3>Total Empleados</h3>
-                        <p><%= ((Map<String, Integer>) request.getAttribute("estadisticas")).get("total")%></p></p>
+                        <p><%= estadisticas.getOrDefault("total", 0) %></p>
                     </div>
                     <div class="icon">👥</div>
                 </div>
                 <div class="card">
                     <div class="info">
                         <h3>Administradores</h3>
-                        <p><%= ((Map<String, Integer>) request.getAttribute("estadisticas")).get("administradores")%></p></p>
+                        <p><%= estadisticas.getOrDefault("administradores", 0) %></p>
                     </div>
                     <div class="icon">🛡️</div>
                 </div>
                 <div class="card">
                     <div class="info">
                         <h3>Vendedores</h3>
-                        <p><%= ((Map<String, Integer>) request.getAttribute("estadisticas")).get("vendedores")%></p></p>
+                        <p><%= estadisticas.getOrDefault("vendedores", 0) %></p>
                     </div>
                     <div class="icon">👤</div>
                 </div>
@@ -83,7 +85,6 @@
                         <p>Gestiona los accesos al sistema</p>
                     </div>
                     <button class="btn-add">+ Agregar Empleado</button>
-                    <!-- Modal (oculto por defecto) -->
                     <div id="modalAgregarEmpleado" class="modal">
                         <div class="modal-content">
                             <span class="close">&times;</span>
@@ -167,15 +168,10 @@
                             <td class="acciones">
                                 <a href="#" class="edit" data-id="<%= e.getId()%>">Editar</a>
 
-
-
-
                                 <% if ("Activo".equalsIgnoreCase(e.getEstado())) {%>
-                                <a href="Empleado?accion=actualizarEstado&id=<%= e.getId()%>&estado=Inactivo" 
-                                   class="deact">Desactivar</a>
+                                <a href="Empleado?accion=actualizarEstado&id=<%= e.getId()%>&estado=Inactivo" class="deact">Desactivar</a>
                                 <% } else {%>
-                                <a href="Empleado?accion=actualizarEstado&id=<%= e.getId()%>&estado=Activo" 
-                                   class="activate">Activar</a>
+                                <a href="Empleado?accion=actualizarEstado&id=<%= e.getId()%>&estado=Activo" class="activate">Activar</a>
                                 <% }%>
                                 <a href="Empleado?accion=eliminar&id=<%= e.getId()%>" class="delete" onclick="return confirm('¿Seguro que deseas eliminar este empleado?');" class="delete">Eliminar</a>
                             </td>
@@ -187,7 +183,6 @@
                         %>
                     </tbody>
                 </table>
-                <!-- Modal Editar -->
                 <div id="modalEditarEmpleado" class="modal">
                     <div class="modal-content " style="max-height: fit-content;">
                         <span class="close">&times;</span>
@@ -308,4 +303,3 @@
             modalEditar.style.display = 'none';
     });
 </script>
-
